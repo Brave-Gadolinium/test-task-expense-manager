@@ -1,0 +1,42 @@
+.button-container {
+    position: relative;
+    display: flex;
+    justify-content:space-around;
+    border-radius: 6px;
+    transition: 0.1s;
+}
+  
+.button__form__delete__row {
+    transition: 0.1s;
+    opacity: 0;
+}
+
+.button-container:hover {
+    transition: 0.1s;
+    background-color: #414144;
+}
+
+.button-container:hover .button__form__delete__row {
+    transition: 0.1s;
+    opacity: 1;
+}
+
+.button__form__delete__row, .button__form__create__row {
+    cursor: url('./assets/HandIndex.png'), pointer;
+    display: flex;
+    width: 100%;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    text-align: center;
+    background: #ff000000;
+    border: none;
+}
+
+.sidebar {
+    background-color: #27272A;    
+}
+
+.Sidebar__bottom {
+    height: 96vh;
+}
