@@ -17,12 +17,14 @@ interface RowProps {
       salary: number;
       overheads: number;
       estimatedProfit: number;
+        child?: Array<any>;
     }>;
   };
-  onAddChild: (parentId: string | null) => void;
+    onAddChild: (parentId: string | null) => void;
+    level: number;
 }
 
-const TableRow: React.FC<RowProps> = ({ row, onAddChild }) => {
+const TableRow: React.FC<RowProps> = ({ row, onAddChild, level }) => {
   const [isEditing, setIsEditing] = useState(!row.rowName);
   const [rowName, setRowName] = useState(row.rowName);
   const [createRow] = useCreateRowMutation();
@@ -40,9 +42,17 @@ const TableRow: React.FC<RowProps> = ({ row, onAddChild }) => {
 
   return (
     <>
-      <tr>
-        <td>
-          <div className="button-container">
+      <tr style={{ marginLeft: `${level * 25}px` }}>
+        <td  style={{ width: `10%` }}>
+          <td className="tree-line">
+            {level > 0 && (
+                <div className="tree-line-vertical" style={{ left: `${level * 25}px` }}></div>
+            )}
+            {level > 0 && (
+                <div className="tree-line-horizontal" style={{ left: `${level * 25}px` }}></div>
+            )}
+          </td>        
+          <div className="button-container" style={{ marginLeft: `${level * 28.5}px` }}>
             <button
               className="button__form__create__row"
               onClick={() => onAddChild(row.id)}
@@ -60,29 +70,14 @@ const TableRow: React.FC<RowProps> = ({ row, onAddChild }) => {
         <td>{row.overheads}</td>
         <td>{row.estimatedProfit}</td>
       </tr>
-      {row.child.map((children) => (
-        <tr>
-        <td>
-          <div className="button-container">
-            <button
-              className="button__form__create__row"
-              onClick={() => onAddChild(children.id)}
-            >
-              <img src="./assets/file.png" alt="Добавить потомка" />
-            </button>
-            <button className="button__form__delete__row" onClick={handleDelete}>
-              <img src="./assets/TrashFill.png" alt="Удалить" />
-            </button>
-          </div>
-        </td>
-        <td>{children.rowName}</td>
-        <td>{children.equipmentCosts}</td>
-        <td>{children.salary}</td>
-        <td>{children.overheads}</td>
-        <td>{children.estimatedProfit}</td>
-      </tr>
+      {row.child?.map((child) => (
+        <TableRow
+          key={child.id}
+          row={child}
+          onAddChild={onAddChild}
+          level={level + 1} // Увеличиваем уровень
+        />
       ))}
-
     </>
   );
 };

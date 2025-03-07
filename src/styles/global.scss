@@ -1,9 +1,74 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+.body {
+    background-color: #222;
+}
+
+.app {
+  /* height: 100vh; */
+  color: white;
+  background-color: #222;
+}
+
+.flex {
+    display: flex;
+}
+
+.sidebar {
+  width: 200px;
+  background-color: #333;
+  padding: 20px;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+.sidebar li {
+  margin-bottom: 10px;
+  cursor: pointer;
+  padding: 5px;
+}
+
+.sidebar li.active {
+  background-color: #444;
+}
+
+.content {
+  flex: 1;
+  padding: 20px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+table th, table td {
+  padding: 8px;
+  text-align: left;
+}
+
+table th {
+  background-color: #444;
+}
+
+tr {
+    border-bottom: #414144 1px solid;
+}
+
 .button-container {
     position: relative;
     display: flex;
     justify-content:space-around;
     border-radius: 6px;
     transition: 0.1s;
+    width: 70px;
 }
   
 .button__form__delete__row {
@@ -39,4 +104,37 @@
 
 .Sidebar__bottom {
     height: 96vh;
+}
+
+.input__change__save {
+    border:1px solid #414144;
+    width: 757px;
+    color: white;
+    background-color: rgba(255, 0, 0, 0);
+}
+
+.input__change__save_type2 {
+    width: 176px;
+}
+
+.tree-line {
+    position: relative;
+  }
+  
+  .tree-line-vertical {
+    position: absolute;
+    top: -20px;
+    left: 17px; /* Поправьте значение в зависимости от вашего дизайна */
+    width: 1px;
+    height: 50px;
+    background-color: #ccc;
+  }
+  
+  .tree-line-horizontal {
+    position: absolute;
+    top: 29px; /* Вертикальное центрирование */
+    left: 18px; /* Поправьте значение в зависимости от вашего дизайна */
+    width: 21px; /* Длина горизонтальной линии */
+    height: 1px;
+    background-color: #ccc;
 }
