@@ -10,15 +10,19 @@ interface Row {
   salary: number;
   overheads: number;
   estimatedProfit: number;
+  machineOperatorSalary?: number;
+  mainCosts?: number;
+  materials?: number;
+  mimExploitation?: number;
+  supportCosts?: number;
   child?: Row[];
 }
-
 
 const Table: React.FC<{ eID: string }> = ({ eID }) => {
   const { data, isLoading, error, refetch } = useGetRowsQuery(eID);
   const [createRow] = useCreateRowMutation();
-    const [tempRow, setTempRow] = useState<Row | null>(null);
-
+  const [tempRow, setTempRow] = useState<Row | null>(null);
+  const [isError, setIsError] = useState(false); // Состояние для ошибки
     // Функция для добавления новой строки
     const handleAddRow = (parentId: string | null) => {
       setTempRow({
@@ -35,7 +39,11 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
 
   // Функция для создания новой строки
   const handleSaveTempRow = async () => {
-    if (!tempRow) return;
+    if (!tempRow || !tempRow.rowName.trim()) {
+        setIsError(true); // Устанавливаем ошибку, если строка пустая
+        return;
+    }
+      
     try {
       await createRow({
         eID,
@@ -54,6 +62,7 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
         },
       });
       setTempRow(null);
+      setIsError(false);
       refetch();
     } catch (error) {
       console.error('Ошибка при создании строки:', error);
@@ -61,11 +70,12 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
   };
     
   if (isLoading) return <div>Загрузка...</div>;
-  if (error) return <div>Ошибка загрузки</div>;
-
+  if (error) {
+    return <div>Ошибка загрузки: {(error as any)?.message || 'Неизвестная ошибка'}</div>;
+  }
+    
   const rows = data || [];
 
-  console.log(rows);
   return (
     <div className="content">
       <p className='content__label'>Строительно-монтажные работы</p>
@@ -81,16 +91,14 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
           </tr>
         </thead>
         <tbody>
-            {rows.map((row) => (
-            <React.Fragment key={row.id}>
-                <TableRow
-                    key={row.id}
-                    row={row}
-                    onAddChild={handleAddRow}
-                    level={0}
-                />
-            </React.Fragment>  
-          ))}
+        {rows.map((row) => (
+            <TableRow
+                key={row.id}
+                row={row}
+                onAddChild={handleAddRow}
+                level={0}
+            />
+            ))}
           {tempRow && (
             <tr>
                 <td>
@@ -98,17 +106,26 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
                         <img src="./assets/file.png" alt="Добавить потомка" />
                     </button>
                 </td>
-                <td><input
+                <td>
+                    <input
                         type="text"
                         value={tempRow.rowName}
-                        onChange={(e) =>
-                            setTempRow({ ...tempRow, rowName: e.target.value })
-                        }
+                        onChange={(e) => {
+                            const value = e.target.value;
+                            setTempRow({ ...tempRow, rowName: value });
+                            if (value.trim()) {
+                                setIsError(false); // Сбрасываем ошибку, если строка не пустая
+                            }
+                        }}
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') handleSaveTempRow();
                         }}
                         className='input__change__save'
-                    /></td>
+                    />
+                    {isError && (
+                        <div className="error-message">Строка не может быть пустой</div>
+                    )}
+                </td>
                 <td><input
                         type="text"
                         value={tempRow.equipmentCosts}

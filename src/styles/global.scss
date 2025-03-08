@@ -1,3 +1,4 @@
+
 * {
     margin: 0;
     padding: 0;
@@ -161,6 +162,7 @@ tr {
     width: 757px;
     color: white;
     background-color: rgba(255, 0, 0, 0);
+    padding: 5px 10px 5px 10px;
 }
 
 .input__change__save_type2 {
@@ -174,7 +176,7 @@ tr {
   .tree-line-vertical {
     position: absolute;
     top: -20px;
-    left: 17px; /* Поправьте значение в зависимости от вашего дизайна */
+    left: 17px;
     width: 1px;
     height: 50px;
     background-color: #ccc;
@@ -182,9 +184,9 @@ tr {
   
   .tree-line-horizontal {
     position: absolute;
-    top: 29px; /* Вертикальное центрирование */
-    left: 18px; /* Поправьте значение в зависимости от вашего дизайна */
-    width: 21px; /* Длина горизонтальной линии */
+    top: 29px;
+    left: 18px; 
+    width: 21px;
     height: 1px;
     background-color: #ccc;
 }
@@ -224,4 +226,20 @@ tr {
     align-items: center;
     padding-left: 20px;
     text-align: left;
+}
+
+.error-message {
+    color: #A1A1AA;
+    font-size: 12px;
+    margin-top: 5px;
+    position: absolute;
+    padding: 5px 15px 5px 15px;
+    background-color: #27272A;
+    border: 1px solid #414144;
+    transition: 0.1s;
+}
+
+.error-message:hover {
+    transition: 0.1s;
+    background-color: #1a1a1b;
 }
