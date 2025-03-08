@@ -53,7 +53,6 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
           supportCosts: 0,
         },
       });
-      console.log(tempRow.parentId)
       setTempRow(null);
       refetch();
     } catch (error) {
@@ -69,7 +68,7 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
   console.log(rows);
   return (
     <div className="content">
-      <h2>Строительно-монтажные работы</h2>
+      <p className='content__label'>Строительно-монтажные работы</p>
       <table className="table">
         <thead>
         <tr>
@@ -82,13 +81,15 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
           </tr>
         </thead>
         <tbody>
-          {rows.map((row) => (
-            <TableRow
-              key={row.id}
-              row={row}
-              onAddChild={handleAddRow}
-              level={0} // Начальный уровень
-            />
+            {rows.map((row) => (
+            <React.Fragment key={row.id}>
+                <TableRow
+                    key={row.id}
+                    row={row}
+                    onAddChild={handleAddRow}
+                    level={0}
+                />
+            </React.Fragment>  
           ))}
           {tempRow && (
             <tr>
@@ -106,7 +107,6 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') handleSaveTempRow();
                         }}
-                        autoFocus
                         className='input__change__save'
                     /></td>
                 <td><input
@@ -118,7 +118,6 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') handleSaveTempRow();
                         }}
-                        autoFocus
                         className='input__change__save input__change__save_type2'
                     /></td>
                 <td><input
@@ -130,7 +129,6 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') handleSaveTempRow();
                         }}
-                        autoFocus
                         className='input__change__save input__change__save_type2'
                     /></td>
                 <td><input
@@ -142,7 +140,6 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') handleSaveTempRow();
                         }}
-                        autoFocus
                         className='input__change__save input__change__save_type2'
                 /></td>
                           <td><input
@@ -154,7 +151,6 @@ const Table: React.FC<{ eID: string }> = ({ eID }) => {
                         onKeyDown={(e) => {
                             if (e.key === 'Enter') handleSaveTempRow();
                         }}
-                        autoFocus
                         className='input__change__save input__change__save_type2'
                 /></td>
             </tr>

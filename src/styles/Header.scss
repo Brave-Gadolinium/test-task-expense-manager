@@ -15,3 +15,32 @@
 .header ul.header__list li {
     padding: 10px;
 }
+
+.header ul.header__list li:hover {
+    transition: 0.1s;
+    cursor: pointer;
+    color: white;
+
+}
+
+.header__list__view {
+    color: #A1A1AA;
+}
+.header__list__manage {
+    color: #A1A1AA;
+}
+
+.header__list li:hover::before {
+    transition: 0.1s;
+    position: absolute;
+    width: 20px;
+    top: 40px;
+    // border-width: 2px;
+    background-color: rgb(255, 255, 255);
+    border: 1px solid #FFFFFF;
+    content: "";
+}
+
+.psevdoElem {
+    
+}

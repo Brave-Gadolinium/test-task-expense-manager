@@ -17,7 +17,7 @@ export const apiSlice = createApi({
     updateRow: builder.mutation({
       query: ({ eID, rID, body }) => ({
         url: `/v1/outlay-rows/entity/${eID}/row/${rID}/update`,
-        method: 'PUT',
+        method: 'POST',
         body,
       }),
     }),

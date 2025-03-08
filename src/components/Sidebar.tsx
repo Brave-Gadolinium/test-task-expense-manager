@@ -4,12 +4,12 @@ function Sidebar() {
   return (
     <div className="sidebar">
       <div className='sidebar__header'>
-        <div>
-          <span>Название проекта</span>
-          <span>Аббревиатуры</span>
+        <div className='sidebar__header--left'>
+          <span className='sidebar__header__name'>Название проекта</span>
+          <span className='sidebar__header__abr'>Аббревиатуры</span>
         </div>
-        <div>
-          <img src="" alt="" />
+        <div className='sidebar__header--right'>
+          <img src="./assets/arrow-down.png" alt="" />
         </div>
       </div>
       <ul className='sidebar__list'>
@@ -17,7 +17,8 @@ function Sidebar() {
         <li><img src="./assets/window.png" alt="Проект Объекты" />Объекты</li>
         <li><img src="./assets/window.png" alt="Проект РД" />РД</li>
         <li><img src="./assets/window.png" alt="Проект МТО" />МТО</li>
-        <li className="active"><img src="./assets/window.png" alt="Проект СМР" />СМР</li>
+        {/* Можно добавить класс active */}
+        <li><img src="./assets/window.png" alt="Проект СМР" />СМР</li>
         <li><img src="./assets/window.png" alt="Проект График" />График</li>
         <li><img src="./assets/window.png" alt="Проект МиМ" />МиМ</li>
         <li><img src="./assets/window.png" alt="Проект Рабочие" />Рабочие</li>
